@@ -33,8 +33,13 @@
 .res-card {
   margin: 10px;
   padding: 10px;
-  width: 300px;
-  height: 420px;
+  width: auto;
+
+  
+}
+
+.res-logo {
+  width: 100%;
   
 }
 
@@ -47,11 +52,31 @@
   padding: 10px;
 }
 
-.res-logo {
-  width: 50%;
-}
+
 
 .filter-btn {
   margin: 10px;
   cursor: pointer;
+}
+
+.shimmer-container {
+ flex-wrap: wrap;
+ display: flex;
+}
+
+.shimmer-card {
+  margin: 20px;
+  width: 200px;
+  height: 400px;
+  background-color: #f0f0f0;
+}
+
+.login {
+  height: 30px;
+  width: 60px;
+  font-style: oblique;
+}
+
+.filter-btn {
+  display: flex;
 }

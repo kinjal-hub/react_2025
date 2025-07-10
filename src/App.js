@@ -7,6 +7,8 @@ import Body from './components/Body';
 
 
 const  AppLayout = () => {
+
+    
     console.log(<Body />);
 return(
     <div className="app">
@@ -15,6 +17,8 @@ return(
     </div>
 );
 };
+
+;
 
 const root = createRoot(document.getElementById("root"));
 root.render(<AppLayout />);
