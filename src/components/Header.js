@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
 const  Header = () => {
@@ -19,12 +19,14 @@ const  Header = () => {
         </div>
         <div  className="nav-items">
             <ul>
-                <li>Home</li>
                 <li>
-                    <a href="/about">About  Us</a>
+                    Home
                 </li>
                 <li>
-                  <Link to="/contact">Contact Us</Link>
+                    About
+                </li>
+                <li>
+                   Contact Us
                 </li>
                 <li>Cart</li>
                 <button  className="login"
