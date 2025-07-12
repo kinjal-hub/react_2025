@@ -39,9 +39,9 @@
 }
 
 .res-logo {
-  width: 100%;
+  width:100%;
   
-}
+  }
 
 .res-card:hover {
   cursor: pointer;
@@ -79,4 +79,5 @@
 
 .filter-btn {
   display: flex;
+  justify-content: space-between;
 }

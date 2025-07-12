@@ -1,7 +1,17 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 const  Header = () => {
     const [btnNameReact, setBtnNameReact] = useState("Login"); 
+    console.log("Header  is  rendered");
+    
+    // if  no  dependency  Array => useEffect  is  called  on Every  Array
+    //if  dependency  array  is  empty  = [] = then  useEffect  is called  intial  render (just  once)
+    // useEffect(() => {
+    // console.log("useeffect  is  called");
+    // }, []);
+    
     return(
     <div  className="header">
         <div  className="logo-container">
@@ -10,8 +20,12 @@ const  Header = () => {
         <div  className="nav-items">
             <ul>
                 <li>Home</li>
-                <li>About  Us</li>
-                <li>Contact Us</li>
+                <li>
+                    <a href="/about">About  Us</a>
+                </li>
+                <li>
+                  <Link to="/contact">Contact Us</Link>
+                </li>
                 <li>Cart</li>
                 <button  className="login"
                 onClick={ () => {
