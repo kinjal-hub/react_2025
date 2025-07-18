@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useStatus from "../utils/useStatus";
+import { LOGO_URL } from "../utils/constants";
 
 
 const  Header = () => {
@@ -16,9 +17,9 @@ const  Header = () => {
     // }, []);
     
     return(
-    <div  className="header">
+    <div  className="flex">
         <div  className="logo-container">
-        <img alt="/logo" src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png?nwm=1&nws=1&industry=food&sf=&txt_keyword=All" />
+        <img alt="w-8" src={LOGO_URL} />
         </div>
         <div  className="nav-items">
             <ul>
