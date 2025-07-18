@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import useStatus from "../utils/useStatus";
 
 
 const  Header = () => {
     const [btnNameReact, setBtnNameReact] = useState("Login"); 
+    const onlineStatus = useStatus();
+
     console.log("Header  is  rendered");
     
     // if  no  dependency  Array => useEffect  is  called  on Every  Array
@@ -21,6 +23,9 @@ const  Header = () => {
         <div  className="nav-items">
             <ul>
                 <li>
+                    OnlineStatus:{onlineStatus === true ? "✅" : "🔴" }
+                </li>
+                <li>
                     <Link to="/">Home</Link>
                 </li>
                 <li>
@@ -28,6 +33,9 @@ const  Header = () => {
                 </li>
                 <li>
                    <Link to="/contact">Contact Us</Link>
+                </li>
+                <li>
+                   <Link to="/grocery">Grocery</Link>
                 </li>
                 <li>Cart</li>
                 <button  className="login"

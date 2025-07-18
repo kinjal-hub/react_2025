@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import Shimmer from './Shimmer';
 import { SWIGGY_API } from '../utils/constants';
 import { Link } from 'react-router-dom';
+import useStatus from '../utils/useStatus';
+
+
 
 const Body = () => {
 
@@ -24,6 +27,13 @@ const Body = () => {
         console.log(json);
        
     };
+
+    const onlinestatus = useStatus();
+    if(onlinestatus === false)
+        return(
+        <h1>Looks Like You're  Offline!! Please  check  Your  Internet  Connection</h1>
+    );
+    
 
     if(listOfRestaurants === 0)
     {
