@@ -44,12 +44,13 @@ const Body = () => {
             <div  className="search">
                 <input
                 type="text"
-                className="search-box"
+                className="border border-black border-solid"
                 value={serchText}
                 onChange={ (e) => {
                     setSerchText(e.target.value);
                 }} />
-                <button  onClick={ () => {
+                <button className="px-4 py-0.5 bg-green-100 m-4 rounded-lg"
+                onClick={ () => {
                     console.log(serchText);
                     const filteredRestuarant =listOfRestaurants.filter(
                         (restaurants)=>restaurants.info.name.includes(serchText) 
@@ -58,14 +59,15 @@ const Body = () => {
                 }} 
                 >
                 Search
-                </button> <button className="filter-btn" onClick={ () => {
+                </button> <button className="px-4 py-0.5 bg-green-100 rounded-lg"
+                onClick={ () => {
                   const filteredList = listOfRestaurants.filter((restaurants) => restaurants.info.avgRating > 4);
                   setListOfRestaurants(filteredList);//updating the state
         }}>
             Top Rated Resturant
         </button>
       </div>
-        <div className="res-container">
+        <div className="flex flex-wrap">
             {       
                     listOfRestaurants.map((restaurant,index) => (
                     <Link
