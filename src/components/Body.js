@@ -1,10 +1,11 @@
 import  ResturantCard from './ResturantCard';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 // import resList from '../utils/Data';
 import Shimmer from './Shimmer';
 import { SWIGGY_API } from '../utils/constants';
 import { Link } from 'react-router-dom';
 import useStatus from '../utils/useStatus';
+import UserContext from '../utils/UserContext';
 
 
 
@@ -12,7 +13,7 @@ const Body = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [serchText, setSerchText] = useState("");
-    console.log("Body rendered");
+    
 
     useEffect(() => {
       fetchdata();
@@ -33,7 +34,8 @@ const Body = () => {
         return(
         <h1>Looks Like You're  Offline!! Please  check  Your  Internet  Connection</h1>
     );
-    
+
+      const {loggedInUser, setUserInfo} = useContext(UserContext);
 
     if(listOfRestaurants === 0)
     {
@@ -59,13 +61,19 @@ const Body = () => {
                 }} 
                 >
                 Search
-                </button> <button className="px-4 py-0.5 bg-green-100 rounded-lg"
+                </button>
+                <button className="px-4 py-0.5 bg-green-100 rounded-lg"
                 onClick={ () => {
                   const filteredList = listOfRestaurants.filter((restaurants) => restaurants.info.avgRating > 4);
                   setListOfRestaurants(filteredList);//updating the state
         }}>
             Top Rated Resturant
         </button>
+        <label>UserName: </label>
+          <input className='m-2 p-2 border border-black'
+          value={loggedInUser}
+          onChange={(e) => setUserInfo(e.target.value)}/>
+        
       </div>
         <div className="flex flex-wrap">
             {       
