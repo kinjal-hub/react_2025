@@ -25,7 +25,7 @@ const {name, cuisines, costForTwoMessage  } = resInfo?.cards[2]?.card?.card?.inf
  
 const { itemCards } = resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[1].card.card;
 // console.log(resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards);
-console.log(itemCards);
+// console.log(itemCards);
 
 const categories =
 resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(

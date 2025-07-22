@@ -8,6 +8,10 @@ import Error from './components/Error';
 import ResturantMenu from './components/RestuarantMenu';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import UserContext from './utils/UserContext';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
+import Cart from './components/Cart';
+
 
 
 // import Grocery from './components/Grocery';
@@ -32,18 +36,20 @@ const  AppLayout = () => {
 useEffect(() => {
 // Make  an  Api  call send Username & password
   const data = {
-    name: "Kinjal  Parmar",
+    name: "Elon Musk",
   };
   setUserInfo(data.name);
 }, []);
 
    return(
+    <Provider store={appStore}>
     <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo }}>
     <div className="app">
       <Header />
       <Outlet />
     </div>
     </UserContext.Provider>
+    </Provider>
     );
 };
 
@@ -73,6 +79,10 @@ const appRouter = createBrowserRouter([
       {
          path: "/restaurants/:resId",
          element: <ResturantMenu />,
+     },
+     {
+         path: "/cart",
+         element: <Cart />,
      },
      
     ],

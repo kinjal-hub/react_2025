@@ -1,6 +1,6 @@
 import  ResturantCard from './ResturantCard';
-import { useEffect, useState, useContext } from 'react';
 // import resList from '../utils/Data';
+import { useEffect, useState, useContext } from 'react';
 import Shimmer from './Shimmer';
 import { SWIGGY_API } from '../utils/constants';
 import { Link } from 'react-router-dom';
