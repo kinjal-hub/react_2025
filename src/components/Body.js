@@ -12,6 +12,7 @@ import UserContext from '../utils/UserContext';
 const Body = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
+    const [ filteredRestuarant, setFilteredRestuarant ] = useState([]);
     const [serchText, setSerchText] = useState("");
     
 
@@ -23,7 +24,8 @@ const Body = () => {
         const data = await fetch(SWIGGY_API);
 
         const json = await data.json();
-        setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListOfRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestuarant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
        
         console.log(json);
        
@@ -48,14 +50,14 @@ const Body = () => {
                 type="text"
                 className="border border-black border-solid"
                 value={serchText}
-                onChange={ (e) => {
+                onChange={(e) => {
                     setSerchText(e.target.value);
                 }} />
                 <button className="px-4 py-0.5 bg-green-100 m-4 rounded-lg"
                 onClick={ () => {
                     console.log(serchText);
-                    const filteredRestuarant =listOfRestaurants.filter(
-                        (restaurants)=>restaurants.info.name.includes(serchText) 
+                    const filteredRestuarant =listOfRestaurants.filter((restaurants) =>
+                        restaurants.info.name.toLowerCase().includes(serchText.toLowerCase()) 
                     );
                     setListOfRestaurants(filteredRestuarant);
                 }} 
@@ -64,8 +66,9 @@ const Body = () => {
                 </button>
                 <button className="px-4 py-0.5 bg-green-100 rounded-lg"
                 onClick={ () => {
-                  const filteredList = listOfRestaurants.filter((restaurants) => restaurants.info.avgRating > 4);
-                  setListOfRestaurants(filteredList);//updating the state
+                  const filteredList = listOfRestaurants.filter((restaurants) =>
+                    restaurants.info.avgRating > 4);
+                  setFilteredRestuarant(filteredList);//updating the state
         }}>
             Top Rated Resturant
         </button>
@@ -77,12 +80,13 @@ const Body = () => {
       </div>
         <div className="flex flex-wrap">
             {       
-                    listOfRestaurants.map((restaurant,index) => (
+            
+                   filteredRestuarant.map((restaurant) => (
                     <Link
                     key={restaurant.info.id}
                     to={"/restaurants/" + restaurant.info.id}
                     >
-                    <ResturantCard  resdata={restaurant}/>
+                    <ResturantCard  resdata={restaurant?.info}/>
                     </Link>
                 ))
             }

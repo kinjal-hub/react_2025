@@ -13,6 +13,7 @@ reducers: {
         state.items.pop();
     },
     clearCart: (state, action) => {
+        // rtk -either mutate the  exsiting  state or a  return  a  new  state
         state.items.length = 0; // state = [];
     },
 }
