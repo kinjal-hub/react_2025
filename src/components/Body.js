@@ -12,7 +12,7 @@ import UserContext from '../utils/UserContext';
 const Body = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
-    const [ filteredRestuarant, setFilteredRestuarant ] = useState([]);
+    const [filteredRestuarant, setFilteredRestuarant] = useState([]);
     const [serchText, setSerchText] = useState("");
     
 
@@ -24,8 +24,8 @@ const Body = () => {
         const data = await fetch(SWIGGY_API);
 
         const json = await data.json();
-        setListOfRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFilteredRestuarant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestuarant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
        
         console.log(json);
        
@@ -50,24 +50,23 @@ const Body = () => {
                 type="text"
                 className="border border-black border-solid"
                 value={serchText}
-                onChange={(e) => {
+                onChange={ (e) => {
                     setSerchText(e.target.value);
                 }} />
                 <button className="px-4 py-0.5 bg-green-100 m-4 rounded-lg"
                 onClick={ () => {
                     console.log(serchText);
-                    const filteredRestuarant =listOfRestaurants.filter((restaurants) =>
-                        restaurants.info.name.toLowerCase().includes(serchText.toLowerCase()) 
+                    const filteredRestuarant =listOfRestaurants.filter(
+                        (res)=>res.info.name.toLowerCase().includes(serchText.toLowerCase()) 
                     );
-                    setListOfRestaurants(filteredRestuarant);
+                    setFilteredRestuarant(filteredRestuarant);
                 }} 
                 >
                 Search
                 </button>
                 <button className="px-4 py-0.5 bg-green-100 rounded-lg"
                 onClick={ () => {
-                  const filteredList = listOfRestaurants.filter((restaurants) =>
-                    restaurants.info.avgRating > 4);
+                  const filteredList = listOfRestaurants.filter((restaurants) => restaurants.info.avgRating > 4);
                   setFilteredRestuarant(filteredList);//updating the state
         }}>
             Top Rated Resturant
@@ -80,13 +79,12 @@ const Body = () => {
       </div>
         <div className="flex flex-wrap">
             {       
-            
-                   filteredRestuarant.map((restaurant) => (
+                    filteredRestuarant.map((restaurant,index) => (
                     <Link
                     key={restaurant.info.id}
                     to={"/restaurants/" + restaurant.info.id}
                     >
-                    <ResturantCard  resdata={restaurant?.info}/>
+                    <ResturantCard  resdata={restaurant}/>
                     </Link>
                 ))
             }
