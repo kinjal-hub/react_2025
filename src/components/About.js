@@ -19,9 +19,10 @@ class About extends React.Component {
     render() {
       // console.log("Parent render");
        return(
-    <div>
-        <h1>About class Component</h1>
+    <div className="p-4 md:p-8 lg:p-12 max-w-7xl mx-auto">
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">About class Component</h1>
         <div>
+          <div className="bg-gray-100 p-4 rounded-lg mb-6"></div>
           loggedIn   User
           <UserContext.Consumer>
               {({loggedInUser}) => <h1 className="text=xl font-bold">{loggedInUser}</h1>}

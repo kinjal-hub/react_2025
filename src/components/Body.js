@@ -15,6 +15,7 @@ const Body = () => {
     const [filteredRestuarant, setFilteredRestuarant] = useState([]);
     const [serchText, setSerchText] = useState("");
     
+    const {loggedInUser, setUserInfo} = useContext(UserContext);
 
     useEffect(() => {
       fetchdata();
@@ -37,7 +38,7 @@ const Body = () => {
         <h1>Looks Like You're  Offline!! Please  check  Your  Internet  Connection</h1>
     );
 
-      const {loggedInUser, setUserInfo} = useContext(UserContext);
+     
 
     if(listOfRestaurants === 0)
     {
@@ -45,7 +46,7 @@ const Body = () => {
     }
     
     return <div  className="filter">
-            <div  className="search">
+            <div  className="search flex flex-wrap justify-center items-center gap-4">
                 <input
                 type="text"
                 className="border border-black border-solid"
@@ -77,7 +78,7 @@ const Body = () => {
           onChange={(e) => setUserInfo(e.target.value)}/>
         
       </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap justify-center">
             {       
                     filteredRestuarant.map((restaurant,index) => (
                     <Link

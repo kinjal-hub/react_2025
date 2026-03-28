@@ -5,69 +5,65 @@ import { LOGO_URL } from "../utils/constants";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
 
+const Header = () => {
+  const [btnNameReact, setBtnNameReact] = useState("Login");
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  
+  const onlineStatus = useStatus();
+  const { loggedInUser } = useContext(UserContext);
+  const cartItems = useSelector((store) => store.cart.items);
 
-const  Header = () => {
-    const [btnNameReact, setBtnNameReact] = useState("Login"); 
-    
-    const onlineStatus = useStatus();
+  return (
+    <div className="flex flex-col md:flex-row justify-between bg-green-100 shadow-lg m-2 p-2 md:px-4">
+      
+      <div className="flex justify-between items-center">
+        <img className="w-24 md:w-32" alt="Logo" src={LOGO_URL} />
+        
+        
+        <button 
+          className="md:hidden p-2 text-2xl" 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? "✕" : "☰"}
+        </button>
+      </div>
 
-    const { loggedInUser } = useContext(UserContext);
-    // console.log(loggedInUser);
+      
+      <div className={`${isMenuOpen ? "block" : "hidden"} md:flex items-center`}>
+        <ul className="flex flex-col md:flex-row p-4 md:p-0 m-0 list-none items-center">
+          <li className="px-2 lg:px-4 py-2 text-sm md:text-base">
+            Status: {onlineStatus ? "✅" : "🔴"}
+          </li>
+          <li className="px-2 lg:px-4 py-2">
+            <Link to="/" className="hover:text-green-700">Home</Link>
+          </li>
+          <li className="px-2 lg:px-4 py-2">
+            <Link to="/about" className="hover:text-green-700">About</Link>
+          </li>
+          <li className="px-2 lg:px-4 py-2">
+            <Link to="/contact" className="hover:text-green-700">Contact</Link>
+          </li>
+          <li className="px-2 lg:px-4 py-2">
+            <Link to="/grocery" className="hover:text-green-700">Grocery</Link>
+          </li>
+          <li className="px-2 lg:px-4 py-2 font-bold text-lg md:text-xl">
+            <Link to="/cart">Cart ({cartItems.length})</Link>
+          </li>
+          
+          <button
+            className="px-4 py-1 mx-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
+            onClick={() => setBtnNameReact(btnNameReact === "Login" ? "Logout" : "Login")}
+          >
+            {btnNameReact}
+          </button>
+          
+          <li className="px-2 lg:px-4 py-2 font-semibold text-gray-700 italic">
+            {loggedInUser}
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
 
-    // Subscribing  to  the  store  using a selector
-     const  cartItems = useSelector((store) => store.cart.items);
-     console.log(cartItems);
-
-   
-   
-    
-    // if  no  dependency  Array => useEffect  is  called  on Every  Array
-    //if  dependency  array  is  empty  = [] = then  useEffect  is called  intial  render (just  once)
-    // useEffect(() => {
-    // console.log("useeffect  is  called");
-    // }, []);
-    
-    return(
-    <div  className="flex justify-between bg-green-100 shadow-lg m-2">
-        <div  className="logo-container">
-        <img className="w-40" alt="/" src={LOGO_URL} />
-        </div>
-        <div  className="flex items-center">
-            <ul className="flex p-4 m-4">
-                <li className="px-4">
-                    OnlineStatus:{onlineStatus === true ? "✅" : "🔴" }
-                </li>
-                <li className="px-4">
-                    <Link to="/">Home</Link>
-                </li>
-                <li className="px-4">
-                    <Link to="/about">About</Link>
-                </li>
-                <li className="px-4">
-                   <Link to="/contact">Contact Us</Link>
-                </li>
-                <li className="px-4">
-                   <Link to="/grocery">Grocery</Link>
-                </li>
-                <li className="px-4 font-bold text-xl">
-                    <Link to="/cart">Cart - ({cartItems.length} items)</Link>
-                    
-                </li>
-                <button  className="login"
-                onClick={ () => {
-                    btnNameReact === "Login"
-                    ? setBtnNameReact("Logout")
-                    : setBtnNameReact("Login");
-                    
-                }}
-                >
-                    {btnNameReact}
-                </button>
-                 <li className="px-4">{loggedInUser}</li>
-            </ul>
-        </div>
-        </div>
-);
-}
-
-export  default Header;
+export default Header;
